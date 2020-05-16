@@ -10,7 +10,7 @@ void setup()
   floorY = height - height/5;
   
   l = new Ladder(floorY, width/12, width/4);
-  k = new Key(height/2, 50);
+  k = new Key(height/2 - 100, 30);
 }
 
 void draw()
