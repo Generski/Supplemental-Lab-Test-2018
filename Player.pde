@@ -6,6 +6,8 @@ class Player
 
   float ground;
 
+  boolean sad = true;
+
   Player(float tempX, float tempY, float tempD)
   {
     x = tempX;
@@ -34,19 +36,29 @@ class Player
     line(x - 1.5 * eyeSize, y + 1.5 * eyeSize, x + 1.5 * eyeSize, y + 1.5 * eyeSize);
 
     //Mouth Ends
-    line(x - 1.5 * eyeSize, y + 1.5 * eyeSize, x - 2 * eyeSize, y + 2.5 * eyeSize);
-    line(x + 1.5 * eyeSize, y + 1.5 * eyeSize, x + 2 * eyeSize, y + 2.5 * eyeSize);
+    if (sad == true)
+    {
+      line(x - 1.5 * eyeSize, y + 1.5 * eyeSize, x - 2 * eyeSize, y + 2.5 * eyeSize);
+      line(x + 1.5 * eyeSize, y + 1.5 * eyeSize, x + 2 * eyeSize, y + 2.5 * eyeSize);
+    } else
+    {
+      line(x - 1.5 * eyeSize, y + 1.5 * eyeSize, x - 2 * eyeSize, y);
+      line(x + 1.5 * eyeSize, y + 1.5 * eyeSize, x + 2 * eyeSize, y);
+    }
   }
 
   void move()
   {
     if (keyPressed)
     {
-      if (x > width/2 - l.w/2 && x < width/2 + l.w/2)
+      if (y >= (l.y - l.h) - d/2)
       {
-        if (keyCode == UP)
+        if (x > width/2 - l.w/2 && x < width/2 + l.w/2)
         {
-          y -= speed;
+          if (keyCode == UP)
+          {
+            y -= speed;
+          }
         }
       }
 
@@ -61,11 +73,25 @@ class Player
         {
           x += speed;
         }
+      } else
+      {
+        if (keyCode == DOWN)
+        {
+          y += speed;
+        }
       }
     }
   }
 
-  void climb()
+  void getKey()
   {
+    float dist = dist(x, y, k.x, k.y);
+    {
+      if (dist < d/2 + k.l)
+      {
+        k.die();
+        sad = false;
+      }
+    }
   }
 }

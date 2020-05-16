@@ -31,6 +31,7 @@ void draw()
   
   p.display();
   p.move();
+  p.getKey();
   
   l.display();
   k.display();
