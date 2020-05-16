@@ -4,7 +4,7 @@ Key k;
 
 float floorY;
 
-float speed = 3;
+float speed = 2f;
 
 
 void setup()

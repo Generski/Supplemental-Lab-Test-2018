@@ -4,11 +4,15 @@ class Player
   float y;
   float d;
 
+  float ground;
+
   Player(float tempX, float tempY, float tempD)
   {
     x = tempX;
     y = tempY;
     d = tempD;
+
+    ground = tempY;
   }
 
   void display()
@@ -38,15 +42,30 @@ class Player
   {
     if (keyPressed)
     {
-      if (keyCode == LEFT)
+      if (x > width/2 - l.w/2 && x < width/2 + l.w/2)
       {
-        x -= speed;
+        if (keyCode == UP)
+        {
+          y -= speed;
+        }
       }
 
-      if (keyCode == RIGHT)
+      if (y >= ground)
       {
-        x += speed;
+        if (keyCode == LEFT)
+        {
+          x -= speed;
+        }
+
+        if (keyCode == RIGHT)
+        {
+          x += speed;
+        }
       }
     }
+  }
+
+  void climb()
+  {
   }
 }
